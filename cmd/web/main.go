@@ -7,12 +7,17 @@ import (
 	"net/http"
 	"os"
 
+	"jvmoraiscb/snippetbox/pkg/models/mysql"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
+// Add a snippets field to the application struct. This will allow us to
+// make the SnippetModel object available to our handlers.
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	snippets *mysql.SnippetModel
 }
 
 
@@ -22,7 +27,7 @@ func main() {
 	// flag will be stored in the addr variable at runtime.
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	// Define a new command-line flag for the MySQL DSN string.
-	dsn := flag.String("dsn", "web:2003@/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "root:pass@/snippetbox?parseTime=true", "MySQL data source name")
 
 	// Importantly, we use the flag.Parse() function to parse the command-line flag.
 	// This reads in the command-line flag value and assigns it to the addr
@@ -57,9 +62,9 @@ func main() {
 
 	// Initialize a new instance of application containing the dependencies.
 	app := &application{
-		errorLog: errorLog,
-		infoLog:
-		infoLog,
+		errorLog: 	errorLog,
+		infoLog: 	infoLog,
+		snippets:	&mysql.SnippetModel{DB: db}
 	}
 
 	// Initialize a new http.Server struct. We set the Addr and Handler fields so

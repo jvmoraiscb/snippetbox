@@ -1,4 +1,4 @@
-module github.com/jvmoraiscb/snippetbox
+module jvmoraiscb/snippetbox
 
 go 1.19
 
