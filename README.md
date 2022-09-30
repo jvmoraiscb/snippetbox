@@ -1,3 +1,3 @@
 # snippetbox
 
-https://phoenixnap.com/kb/mysql-docker-container
+https://phoenixnap.com/kb/mysql-docker-container (help)
